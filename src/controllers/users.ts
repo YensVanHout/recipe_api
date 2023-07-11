@@ -41,7 +41,7 @@ export const updateUser = async (
 
     const user = await getUserById(id);
 
-    user ? (user.username = username) : console.log(user);
+    user ? (user.username = username) : null;
     await user?.save();
 
     return res.json(user);
