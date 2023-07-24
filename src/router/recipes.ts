@@ -13,7 +13,7 @@ export default (router: express.Router) => {
   router.post("/recipes/create", createRecipe);
   router.get("/recipes", getAllRecipes);
   router.get("/recipes/:id", getRecipe);
-  router.get("/randomrecipe", getRandomRecipe);
+  router.get("/randomRecipe", getRandomRecipe);
   router.delete("/recipes/delete/:id", isAuthenticated, deleteRecipe);
   router.patch("/recipes/update/:id", isAuthenticated, updateRecipe);
 };

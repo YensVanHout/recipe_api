@@ -17,7 +17,8 @@ export const GetRandomRecipe = () => {
 };
 
 export const CreateRecipe = (values: Record<string, any>) =>
-  new recipeModel(values.body).save().then((recipe) => recipe.toObject());
+  new recipeModel(values).save().then((recipe) => recipe.toObject());
+
 export const DeleteRecipeById = (id: string) =>
   recipeModel.findByIdAndDelete({ _id: id });
 
