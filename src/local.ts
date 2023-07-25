@@ -23,7 +23,7 @@ server.listen(8080, () => {
 });
 
 mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGO_URI!, {
+mongoose.connect(process.env.MONGO_LOCAL_URI!, {
   dbName: "recipeApp",
 });
 mongoose.connection.on("error", (error) => console.log(error));
