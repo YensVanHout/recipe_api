@@ -23,7 +23,8 @@ export const getRandomRecipe = async (
   res: express.Response
 ) => {
   try {
-    const recipe = await GetRandomRecipe();
+    const sample: number = +req.query.sample! || 1;
+    const recipe = await GetRandomRecipe(sample);
     recipe
       ? res.json(recipe)
       : res.json({ msg: "Error while fetching recipe" });
@@ -38,7 +39,10 @@ export const getAllRecipes = async (
   res: express.Response
 ) => {
   try {
-    const recipes = await GetRecipes();
+    const page: number = +req.query.page! || 1;
+    const limit: number = +req.query.limit! || 6;
+
+    const recipes = await GetRecipes(page, limit);
     return res.json(recipes);
   } catch (error) {
     console.log(error);
