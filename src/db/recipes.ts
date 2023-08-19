@@ -9,12 +9,18 @@ const recipeScheme = new mongoose.Schema({
 
 export const recipeModel = mongoose.model("Recipe", recipeScheme);
 
-export const GetRecipes = (pageNumber: number, nPerPage: number) =>
-  recipeModel
+export const GetRecipes = (
+  pageNumber: number,
+  nPerPage: number,
+  sort: string
+) => {
+  const sortDirection = sort == "asc" ? 1 : -1;
+  return recipeModel
     .find()
-    .sort({ _id: 1 })
+    .sort({ _id: sortDirection })
     .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
     .limit(nPerPage);
+};
 export const GetRecipeById = (id: string) => recipeModel.findOne({ _id: id });
 
 export const GetRandomRecipe = (sample: number) => {

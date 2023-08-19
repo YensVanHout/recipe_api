@@ -41,8 +41,10 @@ export const getAllRecipes = async (
   try {
     const page: number = +req.query.page! || 1;
     const limit: number = +req.query.limit! || 6;
+    const sort: string =
+      req.query.sort!.toString() == "asc" ? "asc" : "desc" || "asc";
 
-    const recipes = await GetRecipes(page, limit);
+    const recipes = await GetRecipes(page, limit, sort);
     return res.json(recipes);
   } catch (error) {
     console.log(error);
