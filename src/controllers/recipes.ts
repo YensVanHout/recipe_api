@@ -111,8 +111,8 @@ export const createRecipe = async (
       tags: tags,
     };
 
-    CreateRecipe(recipe);
-    return res.json(recipe);
+    const newRecipe = await CreateRecipe(recipe);
+    return res.status(201).json({ _id: newRecipe });
   } catch (error) {
     console.log(error);
     res.sendStatus(400);

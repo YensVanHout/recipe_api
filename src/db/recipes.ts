@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
 const recipeScheme = new mongoose.Schema({
   title: { type: String },
@@ -27,8 +27,11 @@ export const GetRandomRecipe = (sample: number) => {
   return recipeModel.aggregate([{ $sample: { size: sample } }]);
 };
 
-export const CreateRecipe = (values: Record<string, any>) =>
-  new recipeModel(values).save().then((recipe) => recipe.toObject());
+export const CreateRecipe = async (values: Record<string, any>) => {
+  let newRecipeId: Types.ObjectId | Schema.Types.ObjectId =
+    await new recipeModel(values).save().then((recipe) => recipe._id);
+  return newRecipeId;
+};
 
 export const DeleteRecipeById = (id: string) =>
   recipeModel.findByIdAndDelete({ _id: id });
