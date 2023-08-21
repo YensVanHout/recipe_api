@@ -8,23 +8,13 @@ export const getRecipe = async (
 ) => {
   try {
     const { id } = req.params;
-    const recipe = await GetRecipeById(id);
-    recipe
-      ? res.json(recipe)
-      : res.json({ msg: "Error while fetching recipe" });
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(400);
-  }
-};
-
-export const getRandomRecipe = async (
-  req: express.Request,
-  res: express.Response
-) => {
-  try {
     const sample: number = +req.query.sample! || 1;
-    const recipe = await GetRandomRecipe(sample);
+    let recipe;
+
+    id != "random"
+      ? (recipe = await GetRecipeById(id))
+      : (recipe = await GetRandomRecipe(sample));
+
     recipe
       ? res.json(recipe)
       : res.json({ msg: "Error while fetching recipe" });
