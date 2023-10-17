@@ -11,7 +11,7 @@ import { isAuthenticated } from "../middlewares";
 export default (router: express.Router) => {
   router.get("/recipes", getAllRecipes);
   router.get("/recipes/:id", getRecipe);
-  router.post("/recipes/create", createRecipe);
+  router.post("/recipes/create/recipe", createRecipe);
   router.delete("/recipes/delete/:id", deleteRecipe);
   router.patch("/recipes/update/:id", updateRecipe);
 };

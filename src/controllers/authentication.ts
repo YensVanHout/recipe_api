@@ -57,14 +57,20 @@ export const login = async (req: express.Request, res: express.Response) => {
 
       await user.save();
 
-      res.cookie("RECIPE-AUTH", user.authentication.sessionToken, {
-        domain: "localhost",
-        path: "/",
-      });
+      const cookie = res.cookie(
+        "RECIPE-AUTH",
+        user.authentication.sessionToken,
+        {
+          domain: "localhost",
+          path: "/",
+        }
+      );
 
-      return res.json({ Message: "Login successful" }).end();
+      return res.send(cookie);
     } else {
-      return res.sendStatus(400);
+      return res
+        .status(401)
+        .json({ Message: "E-mail or password is incorrect." });
     }
   } catch (error) {
     console.log(error);

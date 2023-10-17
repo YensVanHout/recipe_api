@@ -62,15 +62,21 @@ export const updateRecipe = async (
 ) => {
   try {
     const { id } = req.params;
-    const { title, ingredients, steps, tags } = req.body;
+    const { title, time, ingredients, tools, steps, tags } = req.body;
     const recipe = await GetRecipeById(id);
 
     if (recipe) {
       if (recipe.title !== title) {
         recipe.title = title;
       }
+      if (recipe.time !== time) {
+        recipe.time = time;
+      }
       if (recipe.ingredients !== ingredients) {
         recipe.ingredients = ingredients;
+      }
+      if (recipe.tools !== tools) {
+        recipe.tools = tools;
       }
       if (recipe.steps !== steps) {
         recipe.steps = steps;
@@ -92,11 +98,13 @@ export const createRecipe = async (
   res: express.Response
 ) => {
   try {
-    const { title, ingredients, steps, tags } = req.body;
+    const { title, time, ingredients, tools, steps, tags } = req.body;
 
     const recipe = {
       title: title,
+      time: time,
       ingredients: ingredients,
+      tools: tools,
       steps: steps,
       tags: tags,
     };

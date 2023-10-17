@@ -2,7 +2,9 @@ import mongoose, { Schema, Types } from "mongoose";
 
 const recipeScheme = new mongoose.Schema({
   title: { type: String },
+  time: { type: String },
   ingredients: { type: Array<String> },
+  tools: { type: Array<String> },
   steps: { type: Array<String> },
   tags: { type: Array<String> },
 });
