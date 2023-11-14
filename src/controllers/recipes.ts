@@ -17,7 +17,9 @@ export const getRecipe = async (
 
     recipe
       ? res.json(recipe)
-      : res.json({ msg: "Error while fetching recipe" });
+      : id == "random"
+      ? res.json({ msg: "Could not fetch recipe, try again laster" })
+      : res.json({ msg: "Could not find recipe" });
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
