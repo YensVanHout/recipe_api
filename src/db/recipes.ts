@@ -23,6 +23,11 @@ export const GetRecipes = (
     .skip(pageNumber > 0 ? (pageNumber - 1) * nPerPage : 0)
     .limit(nPerPage);
 };
+
+export const GetNumberOfRecipes = () => {
+  return recipeModel.countDocuments();
+};
+
 export const GetRecipeById = (id: string) => recipeModel.findOne({ _id: id });
 
 export const GetRandomRecipe = (sample: number) => {

@@ -1,4 +1,8 @@
-import { CreateRecipe, GetRandomRecipe } from "./../db/recipes";
+import {
+  CreateRecipe,
+  GetNumberOfRecipes,
+  GetRandomRecipe,
+} from "./../db/recipes";
 import express from "express";
 import { DeleteRecipeById, GetRecipeById, GetRecipes } from "../db/recipes";
 
@@ -37,7 +41,11 @@ export const getAllRecipes = async (
       req.query.sort!.toString() == "asc" ? "asc" : "desc" || "asc";
 
     const recipes = await GetRecipes(page, limit, sort);
-    return res.json(recipes);
+    const amount = await GetNumberOfRecipes();
+
+    const object = { recipes: recipes, amount: amount };
+
+    return res.json(object);
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
